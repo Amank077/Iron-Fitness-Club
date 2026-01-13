@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Fitness Club | New York</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Oswald (headings) + Montserrat (body) - perfect for gym/power aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Custom Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: '#0B0F14',
+            accent: '#FFD400',
+            soft: '#F8FAFC'
+          },
+          boxShadow: {
+            glow: '0 0 25px rgba(255,212,0,0.35)'
+          },
+          fontFamily: {
+            heading: ['Oswald', 'sans-serif'],
+            body: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth scrolling behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Scroll reveal animation base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glow effect on buttons */
+    .btn-glow:hover {
+      box-shadow: 0 0 30px rgba(255, 212, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile menu slide-in animation */
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Hamburger icon animation */
+    .hamburger span {
+      transition: all 0.35s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Bouncing + pulsing WhatsApp floating button */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-20px); }
+    }
+
+    @keyframes shadowPulse {
+      0%, 100% { box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
+      50%      { box-shadow: 0 20px 40px rgba(37, 211, 102, 0.55); }
+    }
+
+    .whatsapp-float {
+      animation: 
+        bounce 1.2s infinite ease-in-out,
+        shadowPulse 2s infinite ease-in-out;
+    }
+
+    /* Apply custom fonts globally */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: theme('fontFamily.heading');
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    body {
+      font-family: theme('fontFamily.body');
+    }
+  </style>
+</head>
+
+<body class="bg-dark text-white antialiased">
+
+  <!-- ================= NAVBAR / HEADER ================= -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+      <!-- Logo / Brand Name -->
+      <h1 class="text-2xl md:text-3xl font-heading tracking-wide">
+        <span class="text-accent">Iron Fitness Club</span>
+      </h1>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex gap-8 font-body font-medium">
+        <li><a href="index.html"    class="hover:text-accent transition">Home</a></li>
+        <li><a href="about.html"    class="hover:text-accent transition">About</a></li>
+        <li><a href="membership.html" class="hover:text-accent transition">Membership</a></li>
+        <li><a href="classes.html"  class="hover:text-accent transition">Classes</a></li>
+        <li><a href="trainers.html" class="hover:text-accent transition">Trainers</a></li>
+        <li><a href="gallery.html"  class="hover:text-accent transition">Gallery</a></li>
+        <li><a href="contact.html"  class="hover:text-accent transition">Contact</a></li>
+      </ul>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="menu-toggle" class="md:hidden z-50 focus:outline-none">
+        <div class="hamburger flex flex-col justify-center items-center w-8 h-8 space-y-1.5">
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+        </div>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Slide-out Panel -->
+    <div id="mobile-menu"
+      class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-dark/95 backdrop-blur-xl shadow-2xl z-40 flex flex-col pt-20 px-6 transform">
+
+      <ul class="flex flex-col gap-8 text-xl font-body font-medium mt-10">
+        <li><a href="index.html"    class="hover:text-accent transition mobile-link">Home</a></li>
+        <li><a href="about.html"    class="hover:text-accent transition mobile-link">About</a></li>
+        <li><a href="membership.html" class="hover:text-accent transition mobile-link">Membership</a></li>
+        <li><a href="classes.html"  class="hover:text-accent transition mobile-link">Classes</a></li>
+        <li><a href="trainers.html" class="hover:text-accent transition mobile-link">Trainers</a></li>
+        <li><a href="gallery.html"  class="hover:text-accent transition mobile-link">Gallery</a></li>
+        <li><a href="contact.html"  class="hover:text-accent transition mobile-link">Contact</a></li>
+      </ul>
+
+      <div class="mt-auto mb-12">
+        <a href="tel:+685340408"
+          class="block text-center py-4 rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-black transition text-lg font-body font-semibold">
+          Call Us
+        </a>
+      </div>
+    </div>
+
+    <!-- Overlay when mobile menu is open -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-30 hidden"></div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center">
+
+    <!-- Background Image + Overlay -->
+    <div class="absolute inset-0">
+      <img src="./assets/images/alina-chernysheva-JA2S6sJWleg-unsplash.jpg"
+        class="w-full h-full object-cover opacity-30" alt="Gym background" />
+      <div class="absolute inset-0 bg-gradient-to-b from-dark/60 to-dark"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center max-w-4xl px-6">
+      <h2 class="text-5xl md:text-7xl font-heading leading-tight reveal">
+        Build Your <span class="text-accent">Champion</span> Body
+      </h2>
+
+      <p class="mt-6 text-lg md:text-xl text-gray-300 font-body reveal">
+        Premium fitness experience in Skyline City, New York<br />
+        Train harder. Move better. Live stronger.
+      </p>
+
+      <div class="mt-10 flex flex-col md:flex-row justify-center gap-6 reveal">
+        <a href="membership.html"
+          class="px-10 py-4 rounded-full bg-accent text-black font-body font-bold btn-glow transition">
+          Join Now
+        </a>
+
+        <a href="tel:+685340408"
+          class="px-10 py-4 rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-black transition font-body font-semibold">
+          Call Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES / WHY CHOOSE US ================= -->
+  <section class="py-24 bg-dark">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <h3 class="text-4xl md:text-5xl font-heading">Why Choose Iron Fitness</h3>
+        <p class="text-gray-400 mt-4 font-body text-lg">Elite facilities. Expert trainers. Real results.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="reveal bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:-translate-y-2 transition">
+          <h4 class="text-2xl font-heading text-accent mb-4">Modern Equipment</h4>
+          <p class="text-gray-300 font-body">Top-tier machines & free weights for serious training.</p>
+        </div>
+
+        <div class="reveal bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:-translate-y-2 transition">
+          <h4 class="text-2xl font-heading text-accent mb-4">Expert Coaches</h4>
+          <p class="text-gray-300 font-body">Certified trainers focused on performance & safety.</p>
+        </div>
+
+        <div class="reveal bg-white/5 backdrop-blur-xl p-8 rounded-2xl hover:-translate-y-2 transition">
+          <h4 class="text-2xl font-heading text-accent mb-4">Extended Hours</h4>
+          <p class="text-gray-300 font-body">Open daily from 05:00 AM to 02:00 AM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REAL TRANSFORMATIONS ================= -->
+  <section class="py-24 bg-black">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <h3 class="text-4xl md:text-5xl font-heading">Real Transformations</h3>
+        <p class="text-gray-400 mt-4 font-body text-lg">Results that speak louder than words.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="reveal overflow-hidden rounded-2xl group">
+          <img src="./assets/images/alonso-reyes-0HlI76m4jxU-unsplash.jpg"
+            class="w-full h-80 object-cover group-hover:scale-110 transition duration-500" alt="Transformation 1" />
+        </div>
+
+        <div class="reveal overflow-hidden rounded-2xl group">
+          <img src="./assets/images/karolis-milisauskas-eoVdk1z4ihI-unsplash.jpg"
+            class="w-full h-80 object-cover group-hover:scale-110 transition duration-500" alt="Transformation 2" />
+        </div>
+
+        <div class="reveal overflow-hidden rounded-2xl group">
+          <img src="./assets/images/calugar-ana-maria-c_yBiNhIvY4-unsplash.jpg"
+            class="w-full h-80 object-cover group-hover:scale-110 transition duration-500" alt="Transformation 3" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FLOATING WHATSAPP BUTTON ================= -->
+  <a href="https://wa.me/685340408"
+    class="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl z-50 overflow-hidden hover:scale-110 active:scale-95 transition-all duration-300 whatsapp-float">
+    <img src="./assets/images/whatsapp-logo.png" alt="Chat on WhatsApp" class="w-10 h-10 object-contain" />
+  </a>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-10 bg-dark border-t border-white/10 text-center">
+    <p class="text-gray-400 text-sm font-body">
+      © 2026 Iron Fitness Club | Skyline City, New York
+    </p>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Navbar becomes semi-transparent + blur on scroll (desktop only)
+    const navbar = document.getElementById('navbar');
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 50;
+      const isDesktop = window.innerWidth >= 768;
+
+      if (scrolled && isDesktop) {
+        navbar.classList.add('bg-black/70', 'backdrop-blur-xl', 'py-3');
+        navbar.classList.remove('bg-dark');
+      } else {
+        navbar.classList.remove('bg-black/70', 'backdrop-blur-xl');
+        navbar.classList.add('bg-dark');
+        if (scrolled) navbar.classList.add('py-3');
+        else          navbar.classList.remove('py-3');
+      }
+    }
+
+    window.addEventListener('scroll', updateNavbar);
+    window.addEventListener('resize', updateNavbar);
+    updateNavbar(); // Initial call
+
+    // Scroll reveal animation using Intersection Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(r => observer.observe(r));
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      menuToggle.querySelector('.hamburger').classList.toggle('open');
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) {
+          toggleMenu();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

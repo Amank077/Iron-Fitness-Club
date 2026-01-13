@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Iron Fitness Club</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Oswald (headings) + Montserrat (body) - gym/power aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: '#0B0F14',
+            accent: '#FFD400',
+            soft: '#F8FAFC'
+          },
+          boxShadow: {
+            glow: '0 0 25px rgba(255,212,0,0.35)'
+          },
+          fontFamily: {
+            heading: ['Oswald', 'sans-serif'],
+            body: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Scroll reveal base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glow button */
+    .btn-glow:hover {
+      box-shadow: 0 0 30px rgba(255, 212, 0, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Hamburger animation */
+    .hamburger span {
+      transition: all 0.35s ease;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Bouncing WhatsApp button */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-20px); }
+    }
+
+    @keyframes shadowPulse {
+      0%, 100% { box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
+      50%      { box-shadow: 0 20px 40px rgba(37, 211, 102, 0.55); }
+    }
+
+    .whatsapp-float {
+      animation:
+        bounce 1.2s infinite ease-in-out,
+        shadowPulse 2s infinite ease-in-out;
+    }
+
+    /* Apply custom fonts */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: theme('fontFamily.heading');
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    body {
+      font-family: theme('fontFamily.body');
+    }
+  </style>
+</head>
+
+<body class="bg-dark text-white antialiased">
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+      <h1 class="text-2xl font-heading tracking-wide">
+        <span class="text-accent">Iron Fitness Club</span>
+      </h1>
+
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex gap-8 font-body font-medium">
+        <li><a href="index.html" class="hover:text-accent transition">Home</a></li>
+        <li><a href="about.html" class="hover:text-accent transition">About</a></li>
+        <li><a href="membership.html" class="hover:text-accent transition">Membership</a></li>
+        <li><a href="classes.html" class="hover:text-accent transition">Classes</a></li>
+        <li><a href="trainers.html" class="hover:text-accent transition">Trainers</a></li>
+        <li><a href="gallery.html" class="hover:text-accent transition">Gallery</a></li>
+        <li><a href="contact.html" class="hover:text-accent transition">Contact</a></li>
+      </ul>
+
+      <!-- Mobile Hamburger -->
+      <button id="menu-toggle" class="md:hidden z-50 focus:outline-none">
+        <div class="hamburger flex flex-col justify-center items-center w-8 h-8 space-y-1.5">
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+          <span class="w-7 h-0.5 bg-white rounded-full"></span>
+        </div>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu"
+      class="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-dark/95 backdrop-blur-xl shadow-2xl z-40 flex flex-col pt-20 px-6 transform">
+
+      <ul class="flex flex-col gap-8 text-xl font-body font-medium mt-10">
+        <li><a href="index.html" class="hover:text-accent transition mobile-link">Home</a></li>
+        <li><a href="about.html" class="hover:text-accent transition mobile-link">About</a></li>
+        <li><a href="membership.html" class="hover:text-accent transition mobile-link">Membership</a></li>
+        <li><a href="classes.html" class="hover:text-accent transition mobile-link">Classes</a></li>
+        <li><a href="trainers.html" class="hover:text-accent transition mobile-link">Trainers</a></li>
+        <li><a href="gallery.html" class="hover:text-accent transition mobile-link">Gallery</a></li>
+        <li><a href="contact.html" class="hover:text-accent transition mobile-link">Contact</a></li>
+      </ul>
+
+      <div class="mt-auto mb-12">
+        <a href="tel:+685340408"
+          class="block text-center py-4 rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-black transition text-lg font-body font-semibold">
+          Call Us
+        </a>
+      </div>
+    </div>
+
+    <!-- Overlay when menu is open -->
+    <div id="overlay" class="fixed inset-0 bg-black/60 z-30 hidden"></div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative min-h-[70vh] flex items-center">
+    <div class="absolute inset-0">
+      <img src="./assets/images/alina-chernysheva-JA2S6sJWleg-unsplash.jpg"
+        class="w-full h-full object-cover opacity-30">
+      <div class="absolute inset-0 bg-gradient-to-b from-dark/70 to-dark"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-32">
+      <h1 class="text-5xl md:text-6xl font-heading reveal">
+        About <span class="text-accent">Iron Fitness Club</span>
+      </h1>
+      <p class="mt-6 max-w-2xl text-gray-300 font-body reveal">
+        Where strength, discipline, and champions are built.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT CONTENT ================= -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal">
+        <h2 class="text-4xl font-heading mb-6">
+          The Ultimate Fitness Destination
+        </h2>
+        <p class="text-gray-300 leading-relaxed font-body">
+          Iron Fitness Club is a premium fitness facility located in
+          <strong>Skyline City, New York</strong>. We are dedicated to delivering
+          world-class training environments, expert coaching, and elite equipment.
+        </p>
+
+        <p class="text-gray-400 mt-6 font-body">
+          Our goal is simple: help you unlock your full physical and mental potential.
+        </p>
+      </div>
+
+      <div class="reveal">
+        <img src="./assets/images/point3d-commercial-imaging-ltd-TEbVwp3WC0E-unsplash.jpg"
+          class="rounded-2xl shadow-lg hover:scale-105 transition duration-500">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= COUNTERS ================= -->
+  <section class="py-24 bg-black">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-center">
+
+      <div class="reveal">
+        <h3 class="text-5xl font-heading font-extrabold text-accent counter" data-target="12">0</h3>
+        <p class="mt-4 text-gray-300 font-body">Years Experience</p>
+      </div>
+
+      <div class="reveal">
+        <h3 class="text-5xl font-heading font-extrabold text-accent counter" data-target="1683">0</h3>
+        <p class="mt-4 text-gray-300 font-body">Happy Members</p>
+      </div>
+
+      <div class="reveal">
+        <h3 class="text-5xl font-heading font-extrabold text-accent counter" data-target="28">0</h3>
+        <p class="mt-4 text-gray-300 font-body">Expert Trainers</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MISSION ================= -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6 text-center max-w-4xl">
+
+      <h2 class="text-4xl font-heading reveal">Our Mission</h2>
+
+      <p class="mt-8 text-gray-300 reveal leading-relaxed font-body">
+        To create a culture of excellence in fitness by combining advanced training
+        methodologies, cutting-edge equipment, and a supportive community that
+        motivates champions every day.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ================= EQUIPMENT GALLERY ================= -->
+  <section class="py-24 bg-black">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <h2 class="text-4xl font-heading mb-14 reveal text-center">
+        World-Class Equipment
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="overflow-hidden rounded-2xl reveal group">
+          <img src="./assets/images/vishwanth-pindiboina-zH9uqL_d258-unsplash.jpg"
+            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+        </div>
+
+        <div class="overflow-hidden rounded-2xl reveal group">
+          <img src="./assets/images/nandkishore-sahu-UVcpDTKtgG4-unsplash.jpg"
+            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+        </div>
+
+        <div class="overflow-hidden rounded-2xl reveal group">
+          <img src="./assets/images/andrew-valdivia-yNHg9dZ9I_o-unsplash (1).jpg"
+            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= WHATSAPP FLOATING ================= -->
+  <a href="https://wa.me/685340408" class="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-[#25D366] 
+          flex items-center justify-center shadow-2xl z-50 overflow-hidden
+          hover:scale-110 active:scale-95 transition-all duration-300 whatsapp-float">
+    <img src="./assets/images/whatsapp-logo.png" alt="Chat on WhatsApp" class="w-10 h-10 object-contain">
+  </a>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-10 bg-dark border-t border-white/10 text-center">
+    <p class="text-gray-400 text-sm font-body">
+      © 2026 Iron Fitness Club | Skyline City, New York
+    </p>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Navbar scroll effect - solid on mobile, blur only on desktop+
+    const navbar = document.getElementById('navbar');
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 50;
+      const isDesktop = window.innerWidth >= 768;
+
+      if (scrolled && isDesktop) {
+        navbar.classList.add('bg-black/70', 'backdrop-blur-xl', 'py-3');
+        navbar.classList.remove('bg-dark');
+      } else {
+        navbar.classList.remove('bg-black/70', 'backdrop-blur-xl');
+        navbar.classList.add('bg-dark');
+        if (scrolled) {
+          navbar.classList.add('py-3');
+        } else {
+          navbar.classList.remove('py-3');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateNavbar);
+    window.addEventListener('resize', updateNavbar);
+    // Initial call
+    updateNavbar();
+
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+
+          // Start counter animation when the counter section becomes visible
+          if (entry.target.querySelector('.counter')) {
+            startCounters();
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(r => observer.observe(r));
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-menu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      mobileMenu.classList.toggle('open');
+      menuToggle.querySelector('.hamburger').classList.toggle('open');
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) {
+          toggleMenu();
+        }
+      });
+    });
+
+    // Counter Animation
+    function startCounters() {
+      const counters = document.querySelectorAll('.counter');
+      const duration = 1500; // total animation time in ms
+
+      counters.forEach(counter => {
+        // Skip if already animated
+        if (counter.classList.contains('counted')) return;
+        counter.classList.add('counted');
+
+        const target = parseInt(counter.getAttribute('data-target'));
+        let start = 0;
+        const increment = target / (duration / 16); // ~60fps
+
+        const updateCounter = () => {
+          start += increment;
+          if (start < target) {
+            counter.textContent = Math.ceil(start).toLocaleString();
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target.toLocaleString();
+          }
+        };
+
+        // Small delay so it feels natural after reveal
+        setTimeout(() => {
+          requestAnimationFrame(updateCounter);
+        }, 300);
+      });
+    }
+  </script>
+
+</body>
+
+</html>
